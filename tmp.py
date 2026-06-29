@@ -22,12 +22,10 @@ hold_angles = (90, 180, 0, 90, 90, 132)
 #     'yellow':[(10, 100, 100), (35, 255, 255)],
 # }
 color_ranges = {
-    #'red':   [(170, 70, 50), (180, 255, 255)],
-    # 'green': [(35, 40, 40),  (85, 255, 255)],
-    #'green': [(35, 80, 50), (85, 255, 255)],
+    'red':   [(170, 70, 50), (180, 255, 255)],
+    'green': [(30, 60, 50), (85, 255, 255)],
+    # 'green': [(40, 80, 50), (85, 255, 255)],
     'yellow':[(10, 100, 100), (35, 255, 255)],
-    'red':   [(0, 45, 35),   (12, 255, 255)],
-    'green': [(45, 45, 30),  (90, 255, 255)],
 }
 
 
@@ -70,12 +68,12 @@ if bb:
     print(f'[INFO] Detected bounding boxes: {bb} after running {traveled_result[0]:.2f}')
 
     _, _, yaw = bot.get_imu_attitude_data()
-    run_straight_robot(bot, target_yaw=yaw, base_speed=20, target_distance=0.036)
+    run_straight_robot(bot, target_yaw=yaw, base_speed=20, target_distance=0.03)
     rotate_robot(bot, 90, spd=0.2, delay=1)      # Rotate LEFT
 
     for box in bb:
         if box[0] == color:
-            speed_adjust, dist_adjust = calib_range(dist_calib, box[1], adj=0.2)
+            speed_adjust, dist_adjust = calib_range(dist_calib, box[1], adj=0.18)
             print(f'[INFO] Adjusted distance requirement: {dist_adjust:.2f} m')
     
     _, _, yaw = bot.get_imu_attitude_data()

@@ -32,7 +32,7 @@ def normalize_angle(angle):
 def calib_range(dist_calib, bb_pxl, adj):
     position = 320 - (bb_pxl[0] + bb_pxl[2]/2)
     dist_adjust = position * dist_calib
-    dist_adjust = dist_adjust - adj if dist_adjust > 0 else dist_adjust - adj + 0.01
+    dist_adjust = dist_adjust - adj if dist_adjust > 0 else dist_adjust - adj + 0.03
     speed_adjust = 20 if dist_adjust > 0 else -20
     return speed_adjust, dist_adjust
 
@@ -187,7 +187,7 @@ def run_Cam_thread(id=2, height=480, width=640, height_ratio=0.12, process_every
     box_detection_counts = {}  # (color, x, y, w, h) -> count
     color_confirmed_boxes = {}  # color -> (x, y, w, h)
 
-    while time.time() - start_time < 20:
+    while time.time() - start_time < 10:
         ret, frame = cap.read()
         if not ret:
             print(f'Can not receive frame from camera {id}')
